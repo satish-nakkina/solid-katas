@@ -1,13 +1,18 @@
 package christmasLights.implementations;
 
+import christmasLights.interfaces.BrightnessCalculator;
+import christmasLights.interfaces.LightCounter;
 import christmasLights.interfaces.LightGrid;
 
 public class HolidayLightsController {
     private LightGrid lightGrid;
-    private int count=0;
-
+    private BrightnessCalculator brightness;
+    private LightCounter light;
     public HolidayLightsController(LightGrid lightGrid) {
         this.lightGrid = lightGrid;
+        this.brightness= (BrightnessCalculator) lightGrid;
+        this.light= (LightCounter) lightGrid;
+
     }
 
     public void executeInstructions(String[] instructions) {
@@ -21,7 +26,6 @@ public class HolidayLightsController {
                 int endY = Integer.parseInt(parts[4].split(",")[1]);
 
                 if (parts[1].equals("on")) {
-                    System.out.println("on");
                     lightGrid.turnOn(startX, startY, endX, endY);
                 } else if (parts[1].equals("off")) {
                     lightGrid.turnOff(startX, startY, endX, endY);
@@ -38,9 +42,9 @@ public class HolidayLightsController {
     }
 
     public int getTotalBrightness() {
-        return lightGrid.getTotalBrightness();
+        return brightness.getTotalBrightness();
     }
     public int getTotalLightsLit() {
-        return lightGrid.getTotalLightsLit();
+        return light.getTotalLightsLit();
     }
 }

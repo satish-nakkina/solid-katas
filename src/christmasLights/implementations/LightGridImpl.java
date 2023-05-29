@@ -1,8 +1,10 @@
 package christmasLights.implementations;
 
+import christmasLights.interfaces.BrightnessCalculator;
+import christmasLights.interfaces.LightCounter;
 import christmasLights.interfaces.LightGrid;
 
-public class LightGridImpl implements LightGrid {
+public class LightGridImpl implements LightGrid, BrightnessCalculator, LightCounter {
     private int[][] lights;
     private int[][] brightness;
 
@@ -53,6 +55,7 @@ public class LightGridImpl implements LightGrid {
         }
     }
 
+    @Override
     public int getTotalBrightness() {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j <gridSize; j++) {
@@ -60,9 +63,10 @@ public class LightGridImpl implements LightGrid {
                 totalBrightness+=brightness[i][j];
             }
         }
-     return  totalBrightness;
+        return  totalBrightness;
     }
 
+    @Override
     public int getTotalLightsLit() {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j <gridSize; j++) {
@@ -74,4 +78,5 @@ public class LightGridImpl implements LightGrid {
         }
         return  totalLightsLit;
     }
+
 }
